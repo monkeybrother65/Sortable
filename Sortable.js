@@ -951,7 +951,7 @@
 							newIndex = oldIndex;
 						}
 
-						_dispatchEvent(this, rootEl, 'end', dragEl, rootEl, oldIndex, newIndex);
+						_dispatchEvent(this, rootEl, 'end', dragEl, rootEl, oldIndex, newIndex, evt);
 
 						// Save sorting
 						this.save();
@@ -1256,7 +1256,7 @@
 
 
 
-	function _dispatchEvent(sortable, rootEl, name, targetEl, fromEl, startIndex, newIndex) {
+	function _dispatchEvent(sortable, rootEl, name, targetEl, fromEl, startIndex, newIndex, oldEv) {
 		sortable = (sortable || rootEl[expando]);
 
 		var evt = document.createEvent('Event'),
@@ -1265,6 +1265,7 @@
 
 		evt.initEvent(name, true, true);
 
+		evt.ev = oldEv;
 		evt.to = rootEl;
 		evt.from = fromEl || rootEl;
 		evt.item = targetEl || rootEl;
